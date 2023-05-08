@@ -40,8 +40,9 @@ public class ItemsController {
             modelMap.addAttribute("item", item);
             modelMap.addAttribute("comments", allByItem);
             return "singleItem";
-        } else
+        } else {
             return "redirect:/items";
+        }
     }
 
     @GetMapping("/items/add")
