@@ -1,6 +1,5 @@
 package com.example.listam.controller;
 
-import com.example.listam.entity.Category;
 import com.example.listam.entity.Comment;
 import com.example.listam.entity.Item;
 import com.example.listam.repository.CommentRepository;
@@ -17,7 +16,7 @@ public class CommentController {
     private CommentRepository commentRepository;
 
     @PostMapping("/comments/add")
-    public String categoryAdd(@RequestParam(name = "comment") String comm,
+    public String commentAdd(@RequestParam(name = "comment") String comm,
                               @RequestParam(name = "item") Item item, ModelMap modelMap) {
         Comment comment = new Comment();
         comment.setComment(comm);
@@ -26,5 +25,13 @@ public class CommentController {
         modelMap.addAttribute("comment", comment);
 
         return "redirect:/items/" + item.getId();
+    }
+
+    @GetMapping("/comments/remove")
+    public String removeCategory(@RequestParam(name = "id") int id,
+                                 @RequestParam(name = "itemId") int itemId) {
+        commentRepository.deleteById(id);
+        return "redirect:/items/" + itemId;
+
     }
 }
